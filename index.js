@@ -1,13 +1,14 @@
 // 変数の定義
 const inputFizz = document.getElementById("fizz")
 const inputBuzz = document.getElementById("buzz")
-const Button = document.getElementById("button")
-const lists = document.getElementById("lists")
+const button = document.getElementById("button")
 
 // 関数の定義
 // 出力する値を判別し、値によってFizz、Buzz,FizzBuzzのどれか値の先頭にをひっつける関数
 const FizzBuzz = (fizz, buzz) => {
-  let array = []
+  const array = []
+  const lists = document.getElementById("lists")
+
   for (let i = 1; i < 100; i++) {
     if ( i % fizz == 0 && i % buzz == 0) {
       array.push(`FizzBuzz ${i}`)
@@ -20,33 +21,32 @@ const FizzBuzz = (fizz, buzz) => {
     }
   }
   array.forEach(list => {
-    let li = document.createElement("div")
-    li.innerHTML = list
-    lists.appendChild(li)
+    const element = document.createElement("div")
+    element.innerHTML = list
+    lists.appendChild(element)
   });
 }
 
 // フォームに整数以外の値が入力され、実行された時に呼び出される関数
-const err_FizzBuzz = () => {
-  let li = document.createElement("div")
-  li.innerHTML = "整数を入力してください"
-  lists.appendChild(li)
+const warningErr = () => {
+  const element = document.createElement("div")
+  element.innerHTML = "整数を入力してください"
+  lists.appendChild(element)
 }
 
 // 実行された時に呼び出される関数
-const execFizzBuzz = (e) => {
-  e.preventDefault();
+const execFizzBuzz = () => {
   lists.innerHTML = ""
-  let inputFizzValue = Number(inputFizz.value)
-  let inputBuzzValue = Number(inputBuzz.value)
+  const inputFizzValue = Number(inputFizz.value)
+  const inputBuzzValue = Number(inputBuzz.value)
 
   if ( Number.isInteger(inputFizzValue) && Number.isInteger(inputBuzzValue) ) {
     FizzBuzz(inputFizzValue, inputBuzzValue)
   } else {
-    err_FizzBuzz()
+    warningErr()
   }
 }
 
 // イベントの定義
-Button.addEventListener("click", execFizzBuzz)
+button.addEventListener("click", execFizzBuzz)
 
